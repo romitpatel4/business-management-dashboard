@@ -1,0 +1,581 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f6f8;
+
+    color: #222;
+}
+
+
+/* ================= APP ================= */
+
+.app {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 240px;
+
+    background: #111;
+
+    color: white;
+
+    padding: 25px 15px;
+}
+
+
+.logo {
+    padding: 0 15px 25px;
+}
+
+.logo h2 {
+    margin: 0;
+}
+
+.logo p {
+    margin: 5px 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+
+nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.nav-btn {
+    width: 100%;
+
+    text-align: left;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #ccc;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: #2a2a2a;
+
+    color: white;
+}
+
+
+/* ================= MAIN ================= */
+
+.main {
+    flex: 1;
+
+    padding: 30px;
+
+    min-width: 0;
+}
+
+
+.topbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.topbar h1 {
+    margin: 0;
+}
+
+.topbar p {
+    margin: 5px 0;
+
+    color: #777;
+}
+
+
+.export-btn {
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 11px 16px;
+
+    cursor: pointer;
+}
+
+
+/* ================= PAGES ================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* ================= STATS ================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+.stat-card {
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.stat-icon {
+    font-size: 28px;
+}
+
+
+.stat-card p {
+    margin: 0 0 5px;
+
+    color: #777;
+}
+
+
+.stat-card h2 {
+    margin: 0;
+
+    font-size: 25px;
+}
+
+
+/* ================= PANELS ================= */
+
+.panel {
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.panel-header {
+    display: flex;
+
+    justify-content: space-between;
+}
+
+
+.panel-header h2 {
+    margin: 0;
+}
+
+.panel-header p {
+    color: #777;
+
+    margin: 5px 0 15px;
+}
+
+
+/* ================= TWO COLUMN ================= */
+
+.two-column {
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* ================= CHART ================= */
+
+.sales-chart {
+    height: 280px;
+
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-around;
+
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+.bar-container {
+    height: 100%;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: end;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.bar {
+    width: 65%;
+
+    min-height: 5px;
+
+    background: #222;
+
+    border-radius:
+        5px 5px 0 0;
+
+    position: relative;
+}
+
+
+.bar:hover {
+    opacity: 0.75;
+}
+
+
+.bar-value {
+    position: absolute;
+
+    top: -22px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+
+.bar-label {
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+/* ================= TOP PRODUCTS ================= */
+
+.top-product {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.top-product:last-child {
+    border-bottom: none;
+}
+
+
+.top-product-name {
+    font-weight: bold;
+}
+
+
+.top-product-value {
+    font-weight: bold;
+}
+
+
+/* ================= FORMS ================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+input,
+select {
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    background: white;
+}
+
+
+.form-actions {
+    margin-top: 15px;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.form-actions button {
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    background: #111;
+
+    color: white;
+}
+
+
+.form-actions .secondary {
+    background: #777;
+}
+
+
+/* ================= TOOLBAR ================= */
+
+.toolbar {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.toolbar input {
+    flex: 1;
+}
+
+
+/* ================= TABLE ================= */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+
+th,
+td {
+    padding: 13px;
+
+    border-bottom: 1px solid #eee;
+
+    text-align: left;
+}
+
+
+th {
+    font-size: 13px;
+
+    color: #666;
+
+    background: #fafafa;
+}
+
+
+/* ================= BUTTONS ================= */
+
+.action-btn {
+    border: none;
+
+    padding: 7px 10px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    margin-right: 4px;
+}
+
+
+.edit-btn {
+    background: #eee;
+}
+
+
+.delete-btn {
+    background: #222;
+
+    color: white;
+}
+
+
+.status-select {
+    padding: 6px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 5px;
+}
+
+
+/* ================= STATUS ================= */
+
+.status-low {
+    font-weight: bold;
+}
+
+
+.status-out {
+    font-weight: bold;
+}
+
+
+.status-good {
+    font-weight: bold;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    nav {
+        flex-direction: row;
+
+        overflow-x: auto;
+    }
+
+    .nav-btn {
+        white-space: nowrap;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        flex-direction: column;
+    }
+}

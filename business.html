@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Business Management Dashboard</title>
+
+    <link rel="stylesheet" href="style_business.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>BizTrack</h2>
+            <p>Management System</p>
+        </div>
+
+        <nav>
+
+            <button class="nav-btn active"
+                    data-page="dashboardPage">
+                📊 Dashboard
+            </button>
+
+            <button class="nav-btn"
+                    data-page="productsPage">
+                📦 Products
+            </button>
+
+            <button class="nav-btn"
+                    data-page="ordersPage">
+                🛒 Orders
+            </button>
+
+            <button class="nav-btn"
+                    data-page="customersPage">
+                👥 Customers
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p>
+                    Business overview and analytics
+                </p>
+            </div>
+
+            <button onclick="exportOrders()" class="export-btn">
+                📥 Export Orders
+            </button>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboardPage"
+                 class="page active">
+
+            <!-- KPI CARDS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+
+                    <div>
+                        <p>Total Revenue</p>
+                        <h2 id="dashboardRevenue">₹0</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">🛒</div>
+
+                    <div>
+                        <p>Total Orders</p>
+                        <h2 id="dashboardOrders">0</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+
+                    <div>
+                        <p>Total Products</p>
+                        <h2 id="dashboardProducts">0</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+
+                    <div>
+                        <p>Low Stock Items</p>
+                        <h2 id="dashboardLowStock">0</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- ANALYTICS -->
+
+            <div class="two-column">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Sales Overview</h2>
+                            <p>Revenue by month</p>
+                        </div>
+
+                    </div>
+
+                    <div id="salesChart"
+                         class="sales-chart">
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Top Products</h2>
+                            <p>Based on revenue</p>
+                        </div>
+
+                    </div>
+
+                    <div id="topProducts">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOW STOCK -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Low Stock Alert</h2>
+
+                        <p>
+                            Products that need attention
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="lowStockTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section id="productsPage"
+                 class="page">
+
+            <div class="panel">
+
+                <h2 id="productFormTitle">
+                    Add Product
+                </h2>
+
+                <div class="form-grid">
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Product name"
+                    >
+
+                    <select id="productCategory">
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Clothing">
+                            Clothing
+                        </option>
+
+                        <option value="Food">
+                            Food
+                        </option>
+
+                        <option value="Accessories">
+                            Accessories
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        placeholder="Price"
+                        min="0"
+                    >
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        placeholder="Stock quantity"
+                        min="0"
+                    >
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button onclick="saveProduct()">
+                        <span id="productButtonText">
+                            Add Product
+                        </span>
+                    </button>
+
+                    <button
+                        id="cancelProductButton"
+                        class="secondary"
+                        onclick="cancelProductEdit()"
+                        style="display:none;"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="productSearch"
+                        placeholder="🔎 Search products..."
+                        oninput="renderProducts()"
+                    >
+
+                    <select
+                        id="productFilter"
+                        onchange="renderProducts()"
+                    >
+
+                        <option value="All">
+                            All Categories
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Clothing">
+                            Clothing
+                        </option>
+
+                        <option value="Food">
+                            Food
+                        </option>
+
+                        <option value="Accessories">
+                            Accessories
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Inventory Value</th>
+                            <th>Actions</th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="productsTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ORDERS ================= -->
+
+        <section id="ordersPage"
+                 class="page">
+
+            <div class="panel">
+
+                <h2>Create Order</h2>
+
+                <div class="form-grid">
+
+                    <select id="orderCustomer"></select>
+
+                    <select id="orderProduct"></select>
+
+                    <input
+                        type="number"
+                        id="orderQuantity"
+                        placeholder="Quantity"
+                        min="1"
+                    >
+
+                    <select id="orderStatus">
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Shipped">
+                            Shipped
+                        </option>
+
+                        <option value="Delivered">
+                            Delivered
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button onclick="createOrder()">
+                        Create Order
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="orderSearch"
+                        placeholder="🔎 Search orders..."
+                        oninput="renderOrders()"
+                    >
+
+                    <select
+                        id="orderStatusFilter"
+                        onchange="renderOrders()"
+                    >
+
+                        <option value="All">
+                            All Status
+                        </option>
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Shipped">
+                            Shipped
+                        </option>
+
+                        <option value="Delivered">
+                            Delivered
+                        </option>
+
+                        <option value="Cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="ordersTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CUSTOMERS ================= -->
+
+        <section id="customersPage"
+                 class="page">
+
+            <div class="panel">
+
+                <h2 id="customerFormTitle">
+                    Add Customer
+                </h2>
+
+                <div class="form-grid">
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Customer name"
+                    >
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        placeholder="Email"
+                    >
+
+                    <input
+                        type="text"
+                        id="customerPhone"
+                        placeholder="Phone"
+                    >
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button onclick="saveCustomer()">
+
+                        <span id="customerButtonText">
+                            Add Customer
+                        </span>
+
+                    </button>
+
+                    <button
+                        id="cancelCustomerButton"
+                        class="secondary"
+                        onclick="cancelCustomerEdit()"
+                        style="display:none;"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="customerSearch"
+                        placeholder="🔎 Search customers..."
+                        oninput="renderCustomers()"
+                    >
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Total Orders</th>
+                            <th>Total Spent</th>
+                            <th>Actions</th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="customersTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script_business.js"></script>
+
+</body>
+
+</html>
