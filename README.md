@@ -4,7 +4,7 @@ A responsive business management web application built using HTML, CSS, and Java
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://romitpatel4.github.io/business-management-dashboard/)
+[View Live Demo](https://romitpatel4.github.io/business-management-dashboard/business.html)
 
 ## 📌 Project Overview
 
